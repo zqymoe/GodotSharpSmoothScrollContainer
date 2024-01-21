@@ -135,6 +135,7 @@ public partial class SmoothScrollContainer : ScrollContainer
         {
             foreach (var node in GetChildren())
             {
+                RemoveChild(node);
                 node.QueueFree();
             }
             GridContainer gridContainer = new() { Columns = 10 };
@@ -324,7 +325,7 @@ public partial class SmoothScrollContainer : ScrollContainer
 
     private void OnGuiFocusChanged(Control control)
     {
-        if (_enableFollowFocus && ContentNode.IsAncestorOf(control))
+        if (ContentNode.IsAncestorOf(control))
         {
             var pageRect = new Rect2(
                 _hBarTargetValue,
